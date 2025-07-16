@@ -1,7 +1,9 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
   "functions": {
-    "api/app.py": {
-      "runtime": "@vercel/python"
+    "api/**/*.py": {
+      "runtime": "python3.9"
     }
   },
   "routes": [
@@ -12,10 +14,6 @@
     {
       "src": "/(.*)",
       "dest": "/build/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/build/index.html"
     }
   ]
 }
