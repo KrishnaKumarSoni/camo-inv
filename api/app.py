@@ -62,5 +62,11 @@ app.add_url_rule('/api/categories', 'get_categories', get_categories, methods=['
 app.add_url_rule('/api/auth/login', 'login', login, methods=['POST'])
 app.add_url_rule('/api/auth/signup', 'signup', signup, methods=['POST'])
 
+# Vercel serverless handler
+def handler(request):
+    """Vercel serverless function handler"""
+    return app(request.environ, lambda status, headers: None)
+
+# For local development
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
