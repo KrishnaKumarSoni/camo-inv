@@ -7,11 +7,6 @@
     "CI": "false",
     "GENERATE_SOURCEMAP": "false"
   },
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.9"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
