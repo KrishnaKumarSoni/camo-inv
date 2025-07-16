@@ -1,21 +1,19 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "builds": [
-    {
-      "src": "api/app.py",
-      "use": "@vercel/python"
+  "framework": "create-react-app",
+  "functions": {
+    "api/app.py": {
+      "runtime": "python3.9"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/app.py"
+      "source": "/api/(.*)",
+      "destination": "/api/app.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
