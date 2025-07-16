@@ -1,20 +1,18 @@
 {
   "version": 2,
-  "buildCommand": "npm ci --no-audit --no-fund && npm run build",
-  "outputDirectory": "build",
-  "installCommand": "npm ci --no-audit --no-fund",
-  "env": {
-    "CI": "false",
-    "GENERATE_SOURCEMAP": "false"
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
