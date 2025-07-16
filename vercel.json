@@ -1,13 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    },
     {
       "src": "api/app.py",
       "use": "@vercel/python"
@@ -17,10 +12,6 @@
     {
       "src": "/api/(.*)",
       "dest": "/api/app.py"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|ico|svg))",
-      "dest": "/$1"
     },
     {
       "src": "/(.*)",
