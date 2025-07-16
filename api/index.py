@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -8,10 +10,9 @@ def catch_all(path):
     return jsonify({
         "status": "healthy",
         "service": "camorent-inventory-api",
-        "message": "API is running on Vercel",
+        "message": "Minimal API is running",
         "path": path
     })
 
-# Vercel handler
-def handler(request):
-    return app(request.environ, lambda status, headers: None)
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)
