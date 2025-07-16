@@ -1,21 +1,16 @@
-# Flask API dependencies as specified in PRD
-# PRD: backend: Python Flask with simple REST API structure
+# Flask API dependencies - Vercel-compatible versions
 flask==2.3.3
 flask-cors==4.0.0
 
 # Firebase Admin SDK for Firestore operations 
-# PRD: database: Firebase Firestore using service account JSON authentication
 firebase-admin==6.2.0
 
-# OpenAI integration for Whisper and GPT
-# PRD: ai_processing: OpenAI API for Whisper speech-to-text and GPT-4o-mini for data extraction
-openai==1.3.8
+# OpenAI integration - use compatible version
+openai>=1.3.0
 
-# Web scraping dependencies
-# PRD: web_research: Python requests with Scrapegraphai for open-source web scraping
+# Basic web scraping dependencies (scrapegraphai excluded due to conflicts)
 requests>=2.31.0
 beautifulsoup4>=4.12.2
-scrapegraphai>=1.61.0
 
 # Audio processing
 pydub==0.25.1
