@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Camorent Inventory Onboarding App - Stop Script
+# This script stops both the React frontend and Flask backend
+
+echo "🛑 Stopping Camorent Inventory Onboarding App..."
+
+# Function to check if port is in use
+check_port() {
+    local port=$1
+    if lsof -Pi :$port -sTCP:LISTEN -t >/dev/null ; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to stop process by PID file
+stop_by_pid() {
+    local pid_file=$1
+    local service_name=$2
+    
+    if [ -f "$pid_file" ]; then
+        local pid=$(cat "$pid_file")
+        echo "Stopping $service_name (PID: $pid)..."
+        kill -TERM $pid 2>/dev/null || kill -9 $pid 2>/dev/null || true
+        rm -f "$pid_file"
+        echo "✅ $service_name stopped"
+    else
+        echo "⚠️  No PID file found for $service_name"
+    fi
+}
+
+# Stop services by PID files
+stop_by_pid ".backend.pid" "Flask Backend"
+stop_by_pid ".frontend.pid" "React Frontend"
+
+# Also stop by port (backup method)
+echo ""
+echo "🧹 Cleaning up any remaining processes..."
+
+if check_port 3001; then
+    echo "Stopping process on port 3001 (React Frontend)..."
+    lsof -ti:3001 | xargs kill -9 2>/dev/null || true
+    sleep 1
+    if check_port 3001; then
+        echo "❌ Process on port 3001 could not be stopped"
+    else
+        echo "✅ Port 3001 is now free"
+    fi
+else
+    echo "✅ Port 3001 is already free"
+fi
+
+if check_port 5000; then
+    echo "Stopping process on port 5000 (Flask Backend)..."
+    lsof -ti:5000 | xargs kill -9 2>/dev/null || true
+    sleep 1
+    if check_port 5000; then
+        echo "❌ Process on port 5000 could not be stopped"
+    else
+        echo "✅ Port 5000 is now free"
+    fi
+else
+    echo "✅ Port 5000 is already free"
+fi
+
+# Clean up any node_modules/.cache if needed
+echo ""
+echo "🧹 Cleaning up temporary files..."
+rm -f .backend.pid .frontend.pid
+
+# Optional: Clean up logs (uncomment if desired)
+# rm -rf logs/*
+
+echo ""
+echo "🎉 Camorent Inventory App has been stopped successfully!"
+echo ""
+echo "💡 To start the application again, run: ./start-camo-inv"
+echo "📊 Logs are preserved in the 'logs' directory"

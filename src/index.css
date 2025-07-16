@@ -1,0 +1,34 @@
+/* Tailwind CSS base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import fonts as specified in PRD design system */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* PRD Typography: DM Sans body font, Plus Jakarta Sans headings */
+body {
+  margin: 0;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFFF; /* PRD: Pure white backgrounds */
+  color: #000000; /* PRD: Pure black for text and primary elements */
+}
+
+/* PRD: Mobile-first design with max-width 414px centered on desktop */
+.mobile-container {
+  max-width: 414px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+}
+
+/* PRD: Headings use Plus Jakarta Sans font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
